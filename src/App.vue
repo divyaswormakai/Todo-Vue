@@ -56,4 +56,22 @@ h2 {
 	color: #d72631;
 	font-weight: 600;
 }
+.list-item {
+	width: 100%;
+	font-size: 20px;
+	list-style: none;
+	margin: 25px 5px;
+	padding: 10px 15px;
+	color: white;
+}
+#btn-archive {
+	background-color: tomato;
+	font-size: 15px;
+	padding: 5px;
+}
+#undo {
+	background-color: yellowgreen;
+	font-size: 15px;
+	padding: 5px;
+}
 </style>

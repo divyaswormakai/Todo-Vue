@@ -12,7 +12,7 @@
 					v-for="item in archived"
 					:key="item.id"
 					class="list-item"
-					v-content.cross
+					v-list-type.archive
 				>
 					{{ item.content }}
 				</li>
@@ -29,32 +29,14 @@ export default {
 			archived: 'getArchived',
 		}),
 	},
-	directives: {
-		content: {
-			bind(el, binding, vnode) {
-				if (binding.modifiers['cross']) {
-					console.log('HAH');
-					el.style.textDecoration = 'line-through';
-				}
-			},
-		},
-	},
 };
 </script>
 
-<style>
+<style scoped>
 .app-content {
 	background-color: rgba(224, 102, 102, 0.3);
 }
 ul {
 	width: 70%;
-}
-.list-item {
-	width: 100%;
-	font-size: 20px;
-	list-style: none;
-	margin: 25px 5px;
-	padding: 10px 20px;
-	background-color: rgba(228, 54, 54, 0.5);
 }
 </style>

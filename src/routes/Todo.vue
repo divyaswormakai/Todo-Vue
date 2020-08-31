@@ -14,7 +14,12 @@
 				leave-active-class="animate__animated animate__backOutRight animate__faster"
 				mode="out-in"
 			>
-				<li v-for="item in todos" :key="item.id" class="list-item">
+				<li
+					v-for="item in todos"
+					:key="item.id"
+					class="list-item"
+					v-list-type.todo
+				>
 					<button @click="CompleteTask(item)" id="completeImg">
 						<img
 							src="./../assets/empty.png"
@@ -72,14 +77,7 @@ export default {
 ul {
 	width: 70%;
 }
-.list-item {
-	width: 100%;
-	font-size: 20px;
-	list-style: none;
-	margin: 25px 5px;
-	padding: 10px 5px;
-	background-color: rgba(122, 113, 113, 0.5);
-}
+
 #completeImg {
 	background: url('../assets/empty.png') no-repeat top left;
 	background-size: 50px 50px;

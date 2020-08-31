@@ -7,7 +7,12 @@
 				leave-active-class="animate__animated animate__backOutRight animate__faster"
 				mode="out-in"
 			>
-				<li v-for="item in completed" :key="item.id" class="list-item">
+				<li
+					v-for="item in completed"
+					:key="item.id"
+					class="list-item"
+					v-list-type.complete
+				>
 					{{ item.content }}
 					<button @click="moveToTodo(item)" id="undo">
 						Undo
@@ -38,30 +43,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .app-content {
 	background-color: rgba(110, 236, 110, 0.3);
 }
 ul {
 	width: 70%;
-}
-.list-item {
-	width: 100%;
-	font-size: 20px;
-	list-style: none;
-	margin: 25px 5px;
-	padding: 10px 10px;
-	background-color: rgba(35, 194, 23, 0.658);
-	color: white;
-}
-#btn-archive {
-	background-color: tomato;
-	font-size: 15px;
-	padding: 5px;
-}
-#undo {
-	background-color: yellowgreen;
-	font-size: 15px;
-	padding: 5px;
 }
 </style>
