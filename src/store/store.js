@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
 			{id: 3, content: 'Completed content', tag: 'completed'},
 			{id: 4, content: 'Archived content', tag: 'archived'},
 		],
+		user: {},
 	},
 	getters: {
 		getTodos: state => {
@@ -21,6 +22,9 @@ export const store = new Vuex.Store({
 		},
 		getArchived: state => {
 			return state.lists.filter(elem => elem.tag === 'archived');
+		},
+		getUser: state => {
+			return state.user;
 		},
 	},
 	mutations: {
@@ -51,6 +55,9 @@ export const store = new Vuex.Store({
 				return elem;
 			});
 		},
+		saveUser: (state, payload) => {
+			state.user = payload;
+		},
 	},
 	actions: {
 		AddToAction: ({commit}, payload) => {
@@ -67,6 +74,10 @@ export const store = new Vuex.Store({
 		},
 		MovetoTodoAction: ({commit}, payload) => {
 			commit('moveToTodo', payload);
+		},
+
+		SaveUserAction: ({commit}, payload) => {
+			commit('saveUser', payload);
 		},
 	},
 });

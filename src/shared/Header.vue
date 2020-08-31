@@ -1,7 +1,16 @@
 <template>
 	<div class="app-header">
-		<h1>my TO-DO list</h1>
-		<!-- Navbar here -->
+		<div class="top">
+			<h1>my TO-DO list</h1>
+			<button
+				v-if="user.username !== undefined"
+				class="userBtn"
+				@click="show"
+			>
+				Login
+			</button>
+			<button v-else class="userBtn">Register</button>
+		</div>
 		<div class="navbar">
 			<ul class="navbar">
 				<router-link
@@ -47,7 +56,26 @@
 </template>
 
 <script>
-export default {};
+import {mapGetters} from 'vuex';
+import LoginForm from '../components/LoginForm.vue';
+export default {
+	computed: {
+		...mapGetters({
+			user: 'getUser',
+		}),
+	},
+	methods: {
+		show() {
+			this.$modal.show(LoginForm);
+		},
+		hide() {
+			this.$modal.hide(LoginForm);
+		},
+	},
+	mount() {
+		this.hide();
+	},
+};
 </script>
 
 <style scoped>
@@ -58,9 +86,24 @@ export default {};
 	width: 100%;
 	height: 30vh;
 }
+.top {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
 h1 {
 	color: #d72631;
 	font-weight: 600;
+}
+.userBtn {
+	width: 200px;
+	height: 50px;
+	background-color: salmon;
+	border-radius: 20px;
+	color: white;
+	font-weight: 600;
+	font-size: 16px;
 }
 .navbar {
 	width: 100%;

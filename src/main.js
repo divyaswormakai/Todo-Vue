@@ -5,8 +5,10 @@ import VueRouter from 'vue-router';
 import {routes} from './routes';
 
 import {store} from './store/store';
+import VModal from 'vue-js-modal';
 
 Vue.use(VueRouter);
+Vue.use(VModal, {componentName: 'UserModal'});
 
 const router = new VueRouter({
 	routes,
