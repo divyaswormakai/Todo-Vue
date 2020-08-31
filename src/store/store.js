@@ -63,10 +63,10 @@ export const store = new Vuex.Store({
 		},
 		MovetoArchiveAction: ({commit}, payload) => {
 			console.log(payload);
-			// commit('moveToArchive', payload);
+			commit('moveToArchive', payload);
 		},
 		MovetoTodoAction: ({commit}, payload) => {
-			commit('moveToArchive', payload);
+			commit('moveToTodo', payload);
 		},
 	},
 });
