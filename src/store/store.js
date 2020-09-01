@@ -6,7 +6,6 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
 	state: {
 		lists: JSON.parse(localStorage.getItem('todos')),
-		user: JSON.parse(localStorage.getItem('user')),
 	},
 	getters: {
 		getTodos: state => {
@@ -24,9 +23,6 @@ export const store = new Vuex.Store({
 		getArchived: state => {
 			if (state.lists)
 				return state.lists.filter(elem => elem.tag === 'archived');
-		},
-		getUser: state => {
-			if (state.user) return state.user;
 		},
 	},
 	mutations: {
@@ -69,10 +65,6 @@ export const store = new Vuex.Store({
 			});
 			localStorage.setItem('todos', JSON.stringify(state.lists));
 		},
-		saveUser: (state, payload) => {
-			state.user = payload;
-			localStorage.setItem('user', JSON.stringify(state.user));
-		},
 	},
 	actions: {
 		AddToAction: ({commit}, payload) => {
@@ -88,10 +80,6 @@ export const store = new Vuex.Store({
 		},
 		MovetoTodoAction: ({commit}, payload) => {
 			commit('moveToTodo', payload);
-		},
-
-		SaveUserAction: ({commit}, payload) => {
-			commit('saveUser', payload);
 		},
 	},
 });

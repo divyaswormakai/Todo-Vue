@@ -2,9 +2,8 @@
 	<div class="app-header">
 		<div class="top">
 			<h1>my TO-DO list</h1>
-			<button v-if="user" class="userBtn" @click="show">Login</button>
-			<button v-else class="userBtn">Register</button>
 		</div>
+		<component :is="activeFormComponent"></component>
 		<div class="navbar">
 			<ul class="navbar">
 				<router-link to="/" tag="li" active-class="active" class="nav-item" exact>
@@ -29,11 +28,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import LoginForm from '../components/LoginForm.vue';
 export default {
-	data() {
-		return {showLogin: false, showRegister: false};
-	},
 	computed: {
 		...mapGetters({
 			user: 'getUser',
