@@ -5,31 +5,42 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state: {
-		lists: [
-			{id: 1, content: 'This is content', tag: 'todo'},
-			{id: 2, content: 'Second content', tag: 'todo'},
-			{id: 3, content: 'Completed content', tag: 'completed'},
-			{id: 4, content: 'Archived content', tag: 'archived'},
-		],
-		user: {},
+		lists: JSON.parse(localStorage.getItem('todos')),
+		user: JSON.parse(localStorage.getItem('user')),
 	},
 	getters: {
 		getTodos: state => {
-			return state.lists.filter(elem => elem.tag === 'todo');
+			console.log(state);
+			if (state.lists) {
+				// localStorage.removeItem('todos');
+				console.log(state.lists);
+				return state.lists.filter(elem => elem.tag === 'todo');
+			}
 		},
 		getCompleted: state => {
-			return state.lists.filter(elem => elem.tag === 'completed');
+			if (state.lists)
+				return state.lists.filter(elem => elem.tag === 'completed');
 		},
 		getArchived: state => {
-			return state.lists.filter(elem => elem.tag === 'archived');
+			if (state.lists)
+				return state.lists.filter(elem => elem.tag === 'archived');
 		},
 		getUser: state => {
-			return state.user;
+			if (state.user) return state.user;
 		},
 	},
 	mutations: {
 		addToLists: (state, payload) => {
-			state.lists = state.lists.concat(payload);
+			if (state.lists) {
+				state.lists = state.lists.concat(payload);
+				localStorage.setItem('todos', JSON.stringify(state.lists));
+			} else {
+				console.log('Creating new arra');
+				let temp = [];
+				temp.push(payload);
+				state.lists = temp;
+				localStorage.setItem('todos', JSON.stringify(state.lists));
+			}
 		},
 		moveToCompleted: (state, payload) => {
 			state.lists = state.lists.map(elem => {
@@ -38,6 +49,7 @@ export const store = new Vuex.Store({
 				}
 				return elem;
 			});
+			localStorage.setItem('todos', JSON.stringify(state.lists));
 		},
 		moveToArchive: (state, payload) => {
 			state.lists = state.lists.map(elem => {
@@ -46,6 +58,7 @@ export const store = new Vuex.Store({
 				}
 				return elem;
 			});
+			localStorage.setItem('todos', JSON.stringify(state.lists));
 		},
 		moveToTodo: (state, payload) => {
 			state.lists = state.lists.map(elem => {
@@ -54,9 +67,11 @@ export const store = new Vuex.Store({
 				}
 				return elem;
 			});
+			localStorage.setItem('todos', JSON.stringify(state.lists));
 		},
 		saveUser: (state, payload) => {
 			state.user = payload;
+			localStorage.setItem('user', JSON.stringify(state.user));
 		},
 	},
 	actions: {
@@ -69,7 +84,6 @@ export const store = new Vuex.Store({
 			commit('moveToCompleted', payload);
 		},
 		MovetoArchiveAction: ({commit}, payload) => {
-			console.log(payload);
 			commit('moveToArchive', payload);
 		},
 		MovetoTodoAction: ({commit}, payload) => {

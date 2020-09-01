@@ -2,54 +2,26 @@
 	<div class="app-header">
 		<div class="top">
 			<h1>my TO-DO list</h1>
-			<button
-				v-if="user.username !== undefined"
-				class="userBtn"
-				@click="show"
-			>
-				Login
-			</button>
+			<button v-if="user" class="userBtn" @click="show">Login</button>
 			<button v-else class="userBtn">Register</button>
 		</div>
 		<div class="navbar">
 			<ul class="navbar">
-				<router-link
-					to="/"
-					tag="li"
-					active-class="active"
-					class="nav-item"
-					exact
-				>
+				<router-link to="/" tag="li" active-class="active" class="nav-item" exact>
 					<a>
-						<button class="nav-item-btn">
-							To-do's
-						</button>
+						<button class="nav-item-btn">To-do's</button>
 					</a>
 				</router-link>
-				<router-link
-					to="/completed"
-					tag="li"
-					active-class="active"
-					class="nav-item"
-					exact
-					><a>
-						<button class="nav-item-btn">
-							Completed
-						</button>
-					</a></router-link
-				>
-				<router-link
-					to="/archive"
-					tag="li"
-					active-class="active"
-					class="nav-item"
-					exact
-					><a>
-						<button class="nav-item-btn">
-							Archive
-						</button>
-					</a></router-link
-				>
+				<router-link to="/completed" tag="li" active-class="active" class="nav-item" exact>
+					<a>
+						<button class="nav-item-btn">Completed</button>
+					</a>
+				</router-link>
+				<router-link to="/archive" tag="li" active-class="active" class="nav-item" exact>
+					<a>
+						<button class="nav-item-btn">Archive</button>
+					</a>
+				</router-link>
 			</ul>
 		</div>
 	</div>
@@ -59,21 +31,13 @@
 import {mapGetters} from 'vuex';
 import LoginForm from '../components/LoginForm.vue';
 export default {
+	data() {
+		return {showLogin: false, showRegister: false};
+	},
 	computed: {
 		...mapGetters({
 			user: 'getUser',
 		}),
-	},
-	methods: {
-		show() {
-			this.$modal.show(LoginForm);
-		},
-		hide() {
-			this.$modal.hide(LoginForm);
-		},
-	},
-	mount() {
-		this.hide();
 	},
 };
 </script>

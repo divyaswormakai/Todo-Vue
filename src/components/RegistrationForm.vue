@@ -6,9 +6,6 @@
 		<div>
 			<input type="password" placeholder="Password" />
 		</div>
-		<div>
-			<button class="btn btn-success">Login</button>
-		</div>
 	</div>
 </template>
 
