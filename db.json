@@ -12,7 +12,7 @@
     },
     {
       "content": "todo",
-      "tag": "todo",
+      "tag": "completed",
       "id": 4
     },
     {
@@ -28,7 +28,22 @@
     {
       "content": "aaaaaaa",
       "id": 3019329,
+      "tag": "completed"
+    },
+    {
+      "content": "thisis new",
+      "id": 1973131,
       "tag": "todo"
+    },
+    {
+      "content": "new new",
+      "id": 5071736,
+      "tag": "todo"
+    },
+    {
+      "content": "hahahaa",
+      "id": 2700404,
+      "tag": "completed"
     }
   ]
 }

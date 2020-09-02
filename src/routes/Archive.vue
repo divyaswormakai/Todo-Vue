@@ -1,7 +1,7 @@
 <template>
 	<div class="app-content">
 		<h2>This is the archive page</h2>
-
+		{{ mode }}
 		<ul>
 			<transition-group
 				enter-active-class="animate__animated animate__backInLeft animate__faster"
@@ -9,7 +9,9 @@
 				mode="out-in"
 			>
 				<li
-					v-for="item in serverArchived"
+					v-for="item in mode === 'localStorage'
+						? localArchived
+						: serverArchived"
 					:key="item.id"
 					class="list-item"
 					v-list-type.archive
@@ -26,6 +28,7 @@ import {mapGetters} from 'vuex';
 export default {
 	asyncComputed: {
 		...mapGetters({
+			mode: 'getMode',
 			localArchived: 'local/getArchived',
 			serverArchived: 'server/getArchived',
 		}),

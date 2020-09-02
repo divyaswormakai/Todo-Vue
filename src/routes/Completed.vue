@@ -8,16 +8,18 @@
 				mode="out-in"
 			>
 				<li
-					v-for="item in serverCompleted"
+					v-for="item in mode === 'localStorage'
+						? localCompleted
+						: serverCompleted"
 					:key="item.id"
 					class="list-item"
 					v-list-type.complete
 				>
 					{{ item.content }}
-					<button @click="serverMoveToTodo(item)" id="undo">
+					<button @click="moveToTodo(item)" id="undo">
 						Undo
 					</button>
-					<button @click="serverMoveToArchive(item)" id="btn-archive">
+					<button @click="moveToArchive(item)" id="btn-archive">
 						Archive
 					</button>
 				</li>
@@ -31,6 +33,7 @@ import {mapGetters, mapActions} from 'vuex';
 export default {
 	asyncComputed: {
 		...mapGetters({
+			mode: 'getMode',
 			localCompleted: 'local/getCompleted',
 			serverCompleted: 'server/getCompleted',
 		}),
@@ -42,6 +45,23 @@ export default {
 			serverMoveToArchive: 'server/MovetoArchiveAction',
 			serverMoveToTodo: 'server/MovetoTodoAction',
 		}),
+		moveToTodo(item) {
+			if (this.mode === 'localStorage') {
+				this.localMoveToTodo(item);
+			} else {
+				this.serverMoveToTodo(item);
+				this.$router.go();
+			}
+		},
+
+		moveToArchive(item) {
+			if (this.mode === 'localStorage') {
+				this.localMoveToArchive(item);
+			} else {
+				this.serverMoveToArchive(item);
+				this.$router.go();
+			}
+		},
 	},
 };
 </script>

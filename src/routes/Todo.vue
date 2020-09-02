@@ -15,12 +15,14 @@
 				mode="out-in"
 			>
 				<li
-					v-for="item in serverTodos"
+					v-for="item in mode === 'localStorage'
+						? localTodos
+						: serverTodos"
 					:key="item.id"
 					class="list-item"
 					v-list-type.todo
 				>
-					<button @click="ServerCompeleteTask(item)" id="completeImg">
+					<button @click="CompleteTask(item)" id="completeImg">
 						<img
 							src="./../assets/empty.png"
 							height="50"
@@ -42,26 +44,35 @@ export default {
 			newInput: '',
 		};
 	},
-
+	asyncComputed: {
+		...mapGetters({
+			mode: 'getMode',
+			localTodos: 'local/getTodos',
+			serverTodos: 'server/getTodos',
+		}),
+	},
 	methods: {
 		SavetoList() {
-			this.mode === 'localStorage'
-				? this.LocalAddNewItem({content: this.newInput})
-				: this.ServerAddNewItem({content: this.newInput});
-			this.newInput = '';
+			if (this.mode === 'localStorage') {
+				this.LocalAddNewItem({content: this.newInput});
+			} else {
+				this.ServerAddNewItem({content: this.newInput});
+				this.$router.go();
+			}
+		},
+		CompleteTask(item) {
+			if (this.mode === 'localStorage') {
+				this.LocalCompleteTask(item);
+			} else {
+				this.ServerCompeleteTask(item);
+				this.$router.go();
+			}
 		},
 		...mapActions({
 			LocalAddNewItem: 'local/AddToAction',
 			LocalCompleteTask: 'local/MovetoCompleteAction',
 			ServerAddNewItem: 'server/AddToAction',
 			ServerCompeleteTask: 'server/MovetoCompleteAction',
-		}),
-	},
-	asyncComputed: {
-		...mapGetters({
-			mode: 'getMode',
-			localTodos: 'local/getTodos',
-			serverTodos: 'server/getTodos',
 		}),
 	},
 };
