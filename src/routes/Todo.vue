@@ -47,33 +47,28 @@ export default {
 	asyncComputed: {
 		...mapGetters({
 			mode: 'getMode',
-			localTodos: 'local/getTodos',
-			serverTodos: 'server/getTodos',
+			localTodos: 'localStorage/getTodos',
+			serverTodos: 'jsonServer/getTodos',
 		}),
 	},
 	methods: {
 		SavetoList() {
-			if (this.mode === 'localStorage') {
-				this.LocalAddNewItem({content: this.newInput});
-			} else {
-				this.ServerAddNewItem({content: this.newInput});
-				this.$router.go();
-			}
+			this.$store.dispatch(this.mode + '/AddToAction', {
+				content: this.newInput,
+			});
+			this.ClearInput();
 		},
 		CompleteTask(item) {
-			if (this.mode === 'localStorage') {
-				this.LocalCompleteTask(item);
-			} else {
-				this.ServerCompeleteTask(item);
+			this.$store.dispatch(this.mode + '/MovetoCompleteAction', item);
+			this.ClearInput();
+		},
+		ClearInput() {
+			if (this.mode != 'localStorage') {
 				this.$router.go();
+			} else {
+				this.newInput = '';
 			}
 		},
-		...mapActions({
-			LocalAddNewItem: 'local/AddToAction',
-			LocalCompleteTask: 'local/MovetoCompleteAction',
-			ServerAddNewItem: 'server/AddToAction',
-			ServerCompeleteTask: 'server/MovetoCompleteAction',
-		}),
 	},
 };
 </script>

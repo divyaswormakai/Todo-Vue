@@ -34,31 +34,21 @@ export default {
 	asyncComputed: {
 		...mapGetters({
 			mode: 'getMode',
-			localCompleted: 'local/getCompleted',
-			serverCompleted: 'server/getCompleted',
+			localCompleted: 'localStorage/getCompleted',
+			serverCompleted: 'jsonServer/getCompleted',
 		}),
 	},
 	methods: {
-		...mapActions({
-			localMoveToArchive: 'local/MovetoArchiveAction',
-			localMoveToTodo: 'local/MovetoTodoAction',
-			serverMoveToArchive: 'server/MovetoArchiveAction',
-			serverMoveToTodo: 'server/MovetoTodoAction',
-		}),
 		moveToTodo(item) {
-			if (this.mode === 'localStorage') {
-				this.localMoveToTodo(item);
-			} else {
-				this.serverMoveToTodo(item);
+			this.$store.dispatch(this.mode + '/MovetoTodoAction', item);
+			if (this.mode != 'localStorage') {
 				this.$router.go();
 			}
 		},
 
 		moveToArchive(item) {
-			if (this.mode === 'localStorage') {
-				this.localMoveToArchive(item);
-			} else {
-				this.serverMoveToArchive(item);
+			this.$store.dispatch(this.mode + '/MovetoArchiveAction', item);
+			if (this.mode != 'localStorage') {
 				this.$router.go();
 			}
 		},

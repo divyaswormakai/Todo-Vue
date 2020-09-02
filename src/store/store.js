@@ -12,8 +12,8 @@ export const store = new Vuex.Store({
 		mode: JSON.parse(localStorage.getItem('mode')),
 	},
 	modules: {
-		local: localStorageModule,
-		server: serverStorageModule,
+		localStorage: localStorageModule,
+		jsonServer: serverStorageModule,
 	},
 	getters: {
 		getUser: state => {

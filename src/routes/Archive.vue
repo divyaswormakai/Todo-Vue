@@ -29,8 +29,8 @@ export default {
 	asyncComputed: {
 		...mapGetters({
 			mode: 'getMode',
-			localArchived: 'local/getArchived',
-			serverArchived: 'server/getArchived',
+			localArchived: 'localStorage/getArchived',
+			serverArchived: 'jsonServer/getArchived',
 		}),
 	},
 };

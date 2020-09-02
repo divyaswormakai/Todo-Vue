@@ -6,7 +6,7 @@ import * as listServices from '../services/listService';
 export const serverStorageModule = {
 	namespaced: true,
 	state: async () => ({
-		lists: await listServices.getLists(),
+		lists: [],
 	}),
 	getters: {
 		getTodos: async state => {
@@ -30,40 +30,24 @@ export const serverStorageModule = {
 			}
 		},
 	},
-	mutations: {
-		addToLists: async (state, payload) => {
-			let addedVal = await listServices.addtoList(payload);
-			state.lists = await listServices.getLists();
-			console.log(state.lists[state.lists.length - 1]);
-		},
-		moveToCompleted: async (state, payload) => {
-			payload.tag = 'completed';
-			let updatedVal = await listServices.updateList(payload);
-		},
-		moveToArchive: async (state, payload) => {
-			console.log('Archigin');
-			payload.tag = 'archived';
-			let updatedVal = await listServices.updateList(payload);
-		},
-		moveToTodo: async (state, payload) => {
-			payload.tag = 'todo';
-			let updatedVal = await listServices.updateList(payload);
-		},
-	},
+
 	actions: {
-		AddToAction: ({commit}, payload) => {
+		AddToAction: async (context, payload) => {
 			payload.id = Math.floor(Math.random() * 10000000);
 			payload.tag = 'todo';
-			commit('addToLists', payload);
+			await listServices.addtoList(payload);
 		},
-		MovetoCompleteAction: ({commit}, payload) => {
-			commit('moveToCompleted', payload);
+		MovetoCompleteAction: async (context, payload) => {
+			payload.tag = 'completed';
+			await listServices.updateList(payload);
 		},
-		MovetoArchiveAction: ({commit}, payload) => {
-			commit('moveToArchive', payload);
+		MovetoArchiveAction: async (context, payload) => {
+			payload.tag = 'archived';
+			await listServices.updateList(payload);
 		},
-		MovetoTodoAction: ({commit}, payload) => {
-			commit('moveToTodo', payload);
+		MovetoTodoAction: async (context, payload) => {
+			payload.tag = 'todo';
+			await listServices.updateList(payload);
 		},
 	},
 };
