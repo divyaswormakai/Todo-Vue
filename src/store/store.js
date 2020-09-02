@@ -22,6 +22,7 @@ export const store = new Vuex.Store({
 			}
 		},
 		getMode: state => {
+			console.log(state);
 			if (state.mode) {
 				return state.mode;
 			}

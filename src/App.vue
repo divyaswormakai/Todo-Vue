@@ -1,6 +1,9 @@
 <template>
 	<div v-if="user" id="app">
-		<transition appear-active-class="animate__animated animate__fadeInDown" appear>
+		<transition
+			appear-active-class="animate__animated animate__fadeInDown"
+			appear
+		>
 			<app-header></app-header>
 		</transition>
 		<transition
@@ -10,7 +13,10 @@
 		>
 			<router-view></router-view>
 		</transition>
-		<transition appear-active-class="animate__animated animate__fadeInDown" appear>
+		<transition
+			appear-active-class="animate__animated animate__fadeInDown"
+			appear
+		>
 			<app-footer></app-footer>
 		</transition>
 	</div>
@@ -54,9 +60,10 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	min-height: 70vh;
+	min-height: 65vh;
 	border-radius: 50px 50px 0px 0px;
 }
+
 h2 {
 	color: #d72631;
 	font-weight: 600;

@@ -4,46 +4,50 @@
 			<h1>my TO-DO list</h1>
 			<div>
 				Welcome,
-				<b>{{user.username}}</b>
-				<button @click="logOutUser" class="btn btn-danger">Log out</button>
+				<b>{{ user.username }}</b>
+				<button @click="logOutUser" class="btn btn-danger">
+					Log out
+				</button>
 			</div>
 		</div>
 		<div class="row option-row">
-			<!-- <label for="localStorage">
-				<input
-					type="radio"
-					id="localStorage"
-					value="localStorage"
-					@click="toggleMode('localStorage')"
-					:checked="mode=='localStorage'"
-				/>
-				LocalStorage
-			</label>
-			<label for="jsonServer">
-				<input
-					type="radio"
-					id="jsonServer"
-					value="jsonServer"
-					@click="toggleMode('jsonServer')"
-					:checked="mode=='jsonServer'"
-				/>
-				JsonServer
-			</label>-->
-			{{mode}}
+			<app-mode-switch
+				v-model="currentMode"
+				:changeMode="changeMode"
+			></app-mode-switch>
+			{{ currentMode }}
 		</div>
 		<div class="navbar">
 			<ul class="navbar">
-				<router-link to="/" tag="li" active-class="active" class="nav-item" exact>
+				<router-link
+					to="/"
+					tag="li"
+					active-class="active"
+					class="nav-item"
+					exact
+				>
 					<a>
 						<button class="nav-item-btn">To-do's</button>
 					</a>
 				</router-link>
-				<router-link to="/completed" tag="li" active-class="active" class="nav-item" exact>
+				<router-link
+					to="/completed"
+					tag="li"
+					active-class="active"
+					class="nav-item"
+					exact
+				>
 					<a>
 						<button class="nav-item-btn">Completed</button>
 					</a>
 				</router-link>
-				<router-link to="/archive" tag="li" active-class="active" class="nav-item" exact>
+				<router-link
+					to="/archive"
+					tag="li"
+					active-class="active"
+					class="nav-item"
+					exact
+				>
 					<a>
 						<button class="nav-item-btn">Archive</button>
 					</a>
@@ -55,10 +59,20 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
+import ModeSwitchVue from '../components/ModeSwitch.vue';
 export default {
+	created() {
+		this.currentMode = this.mode;
+	},
+	data() {
+		return {
+			currentMode: '',
+		};
+	},
 	methods: {
 		...mapActions({
 			logOut: 'LogOutAction',
+			changeMode: 'ChangeModeAction',
 		}),
 		logOutUser() {
 			this.logOut();
@@ -77,6 +91,9 @@ export default {
 			mode: 'getMode',
 		}),
 	},
+	components: {
+		appModeSwitch: ModeSwitchVue,
+	},
 };
 </script>
 
@@ -86,7 +103,7 @@ export default {
 	flex-direction: column;
 	text-align: center;
 	width: 100%;
-	height: 30vh;
+	height: 35vh;
 }
 .top {
 	display: flex;
