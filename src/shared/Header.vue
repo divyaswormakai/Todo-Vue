@@ -15,7 +15,6 @@
 				v-model="currentMode"
 				:changeMode="changeMode"
 			></app-mode-switch>
-			{{ currentMode }}
 		</div>
 		<div class="navbar">
 			<ul class="navbar">
