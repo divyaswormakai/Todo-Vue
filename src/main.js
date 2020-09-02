@@ -6,9 +6,11 @@ import {routes} from './routes';
 
 import {store} from './store/store';
 import VModal from 'vue-js-modal';
+import AsyncComputed from 'vue-async-computed';
 
 Vue.use(VueRouter);
 Vue.use(VModal, {componentName: 'UserModal'});
+Vue.use(AsyncComputed);
 
 const router = new VueRouter({
 	routes,
@@ -24,7 +26,6 @@ Vue.directive('list-type', {
 			el.style.background = 'rgba(35, 194, 23, 0.658)';
 		}
 		if (binding.modifiers['archive']) {
-			console.log('ASDF');
 			el.style.background = 'rgba(228, 54, 54, 0.5)';
 			el.style.textDecoration = 'line-through';
 		}

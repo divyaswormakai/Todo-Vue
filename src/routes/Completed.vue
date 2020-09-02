@@ -8,16 +8,16 @@
 				mode="out-in"
 			>
 				<li
-					v-for="item in completed"
+					v-for="item in serverCompleted"
 					:key="item.id"
 					class="list-item"
 					v-list-type.complete
 				>
 					{{ item.content }}
-					<button @click="moveToTodo(item)" id="undo">
+					<button @click="serverMoveToTodo(item)" id="undo">
 						Undo
 					</button>
-					<button @click="moveToArchive(item)" id="btn-archive">
+					<button @click="serverMoveToArchive(item)" id="btn-archive">
 						Archive
 					</button>
 				</li>
@@ -29,15 +29,18 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 export default {
-	computed: {
+	asyncComputed: {
 		...mapGetters({
-			completed: 'getCompleted',
+			localCompleted: 'local/getCompleted',
+			serverCompleted: 'server/getCompleted',
 		}),
 	},
 	methods: {
 		...mapActions({
-			moveToArchive: 'MovetoArchiveAction',
-			moveToTodo: 'MovetoTodoAction',
+			localMoveToArchive: 'local/MovetoArchiveAction',
+			localMoveToTodo: 'local/MovetoTodoAction',
+			serverMoveToArchive: 'server/MovetoArchiveAction',
+			serverMoveToTodo: 'server/MovetoTodoAction',
 		}),
 	},
 };

@@ -15,12 +15,12 @@
 				mode="out-in"
 			>
 				<li
-					v-for="item in todos"
+					v-for="item in serverTodos"
 					:key="item.id"
 					class="list-item"
 					v-list-type.todo
 				>
-					<button @click="CompleteTask(item)" id="completeImg">
+					<button @click="ServerCompeleteTask(item)" id="completeImg">
 						<img
 							src="./../assets/empty.png"
 							height="50"
@@ -35,27 +35,33 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import {mapGetters, mapActions, mapState} from 'vuex';
 export default {
 	data() {
 		return {
 			newInput: '',
 		};
 	},
+
 	methods: {
 		SavetoList() {
-			console.log(this.newInput);
-			this.AddNewItem({content: this.newInput});
+			this.mode === 'localStorage'
+				? this.LocalAddNewItem({content: this.newInput})
+				: this.ServerAddNewItem({content: this.newInput});
 			this.newInput = '';
 		},
 		...mapActions({
-			AddNewItem: 'AddToAction',
-			CompleteTask: 'MovetoCompleteAction',
+			LocalAddNewItem: 'local/AddToAction',
+			LocalCompleteTask: 'local/MovetoCompleteAction',
+			ServerAddNewItem: 'server/AddToAction',
+			ServerCompeleteTask: 'server/MovetoCompleteAction',
 		}),
 	},
-	computed: {
+	asyncComputed: {
 		...mapGetters({
-			todos: 'getTodos',
+			mode: 'getMode',
+			localTodos: 'local/getTodos',
+			serverTodos: 'server/getTodos',
 		}),
 	},
 };

@@ -9,7 +9,7 @@
 				mode="out-in"
 			>
 				<li
-					v-for="item in archived"
+					v-for="item in serverArchived"
 					:key="item.id"
 					class="list-item"
 					v-list-type.archive
@@ -24,9 +24,10 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
-	computed: {
+	asyncComputed: {
 		...mapGetters({
-			archived: 'getArchived',
+			localArchived: 'local/getArchived',
+			serverArchived: 'server/getArchived',
 		}),
 	},
 };

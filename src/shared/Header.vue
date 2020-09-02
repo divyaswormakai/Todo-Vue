@@ -2,8 +2,35 @@
 	<div class="app-header">
 		<div class="top">
 			<h1>my TO-DO list</h1>
+			<div>
+				Welcome,
+				<b>{{user.username}}</b>
+				<button @click="logOutUser" class="btn btn-danger">Log out</button>
+			</div>
 		</div>
-		<component :is="activeFormComponent"></component>
+		<div class="row option-row">
+			<!-- <label for="localStorage">
+				<input
+					type="radio"
+					id="localStorage"
+					value="localStorage"
+					@click="toggleMode('localStorage')"
+					:checked="mode=='localStorage'"
+				/>
+				LocalStorage
+			</label>
+			<label for="jsonServer">
+				<input
+					type="radio"
+					id="jsonServer"
+					value="jsonServer"
+					@click="toggleMode('jsonServer')"
+					:checked="mode=='jsonServer'"
+				/>
+				JsonServer
+			</label>-->
+			{{mode}}
+		</div>
 		<div class="navbar">
 			<ul class="navbar">
 				<router-link to="/" tag="li" active-class="active" class="nav-item" exact>
@@ -27,11 +54,27 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 export default {
+	methods: {
+		...mapActions({
+			logOut: 'LogOutAction',
+		}),
+		logOutUser() {
+			this.logOut();
+			this.$router.go();
+		},
+		toggleMode(mode) {
+			console.log(mode);
+			console.log(this.mode);
+			this.mode = mode;
+			console.log(this.mode);
+		},
+	},
 	computed: {
 		...mapGetters({
 			user: 'getUser',
+			mode: 'getMode',
 		}),
 	},
 };
@@ -55,6 +98,7 @@ h1 {
 	color: #d72631;
 	font-weight: 600;
 }
+
 .userBtn {
 	width: 200px;
 	height: 50px;

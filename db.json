@@ -1,3 +1,34 @@
 {
-	"users": []
+  "lists": [
+    {
+      "content": "ASDFASDFASD",
+      "tag": "archived",
+      "id": 1
+    },
+    {
+      "content": "AD",
+      "tag": "archived",
+      "id": 123
+    },
+    {
+      "content": "todo",
+      "tag": "todo",
+      "id": 4
+    },
+    {
+      "content": "Archive",
+      "tag": "archived",
+      "id": 6
+    },
+    {
+      "content": "asdf",
+      "id": 4593454,
+      "tag": "archived"
+    },
+    {
+      "content": "aaaaaaa",
+      "id": 3019329,
+      "tag": "todo"
+    }
+  ]
 }
