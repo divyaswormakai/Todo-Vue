@@ -1,9 +1,6 @@
 <template>
 	<div v-if="user" id="app">
-		<transition
-			appear-active-class="animate__animated animate__fadeInDown"
-			appear
-		>
+		<transition appear-active-class="animate__animated animate__fadeInDown" appear>
 			<app-header></app-header>
 		</transition>
 		<transition
@@ -13,10 +10,7 @@
 		>
 			<router-view></router-view>
 		</transition>
-		<transition
-			appear-active-class="animate__animated animate__fadeInDown"
-			appear
-		>
+		<transition appear-active-class="animate__animated animate__fadeInDown" appear>
 			<app-footer></app-footer>
 		</transition>
 	</div>

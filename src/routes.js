@@ -1,6 +1,11 @@
 import Todo from './routes/Todo.vue';
 
 //lazy routing from here
+const SideBar = resolve => {
+	require.ensure(['./routes/SideBar.vue'], () => {
+		resolve(require('./routes/SideBar.vue'));
+	});
+};
 const Completed = resolve => {
 	require.ensure(['./routes/Completed.vue'], () => {
 		resolve(require('./routes/Completed.vue'));
@@ -16,15 +21,27 @@ const Page404 = resolve => {
 		resolve(require('./routes/Page404.vue'));
 	});
 };
+const SideBarComp = resolve => {
+	require.ensure(['./components/SideBarComp.vue'], () => {
+		resolve(require('./components/SideBarComp.vue'));
+	});
+};
 
 export const routes = [
-	{path: '', component: Todo},
+	{path: '', component: Todo, name: 'home'},
+	{path: '/completed', component: Completed, name: 'completed'},
 
+	{
+		path: '/sidebar',
+		component: SideBar,
+		children: [
+			{path: '', component: SideBarComp},
+			{path: 'archived', component: Archive, name: 'archived'},
+		],
+	},
 	// path : '/something/completed/
 	// path: '/something/archive/
-	{path: '/others', component: Completed},
 
-	{path: '/archive', component: Archive},
 	{path: '*', component: Page404},
 ];
 // /complete/:id/details

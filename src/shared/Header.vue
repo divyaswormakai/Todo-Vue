@@ -5,50 +5,27 @@
 			<div>
 				Welcome,
 				<b>{{ user.username }}</b>
-				<button @click="logOutUser" class="btn btn-danger">
-					Log out
-				</button>
+				<button @click="logOutUser" class="btn btn-danger">Log out</button>
 			</div>
 		</div>
 		<div class="row option-row">
-			<app-mode-switch
-				v-model="currentMode"
-				:changeMode="changeMode"
-			></app-mode-switch>
+			<app-mode-switch v-model="currentMode" :changeMode="changeMode"></app-mode-switch>
 		</div>
 		<div class="navbar">
 			<ul class="navbar">
-				<router-link
-					to="/"
-					tag="li"
-					active-class="active"
-					class="nav-item"
-					exact
-				>
+				<router-link to="/" tag="li" active-class="active" class="nav-item" exact>
 					<a>
 						<button class="nav-item-btn">To-do's</button>
 					</a>
 				</router-link>
-				<router-link
-					to="/completed"
-					tag="li"
-					active-class="active"
-					class="nav-item"
-					exact
-				>
+				<router-link to="/completed" tag="li" active-class="active" class="nav-item" exact>
 					<a>
-						<button class="nav-item-btn">Completed</button>
+						<button class="nav-item-btn" id="complete">Completed</button>
 					</a>
 				</router-link>
-				<router-link
-					to="/archive"
-					tag="li"
-					active-class="active"
-					class="nav-item"
-					exact
-				>
+				<router-link to="/sidebar" tag="li" active-class="active" class="nav-item" exact>
 					<a>
-						<button class="nav-item-btn">Archive</button>
+						<button class="nav-item-btn">Others...</button>
 					</a>
 				</router-link>
 			</ul>
