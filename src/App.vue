@@ -1,5 +1,5 @@
 <template>
-	<div v-if="user" id="app">
+	<div id="app">
 		<transition appear-active-class="animate__animated animate__fadeInDown" appear>
 			<app-header></app-header>
 		</transition>
@@ -14,27 +14,16 @@
 			<app-footer></app-footer>
 		</transition>
 	</div>
-	<div v-else id="app">
-		<app-registration-form></app-registration-form>
-	</div>
 </template>
 
 <script>
 import Header from './shared/Header.vue';
 import Footer from './shared/Footer.vue';
-import RegistrationForm from './components/RegistrationForm.vue';
-import {mapGetters} from 'vuex';
 
 export default {
 	components: {
 		appHeader: Header,
 		appFooter: Footer,
-		appRegistrationForm: RegistrationForm,
-	},
-	computed: {
-		...mapGetters({
-			user: 'getUser',
-		}),
 	},
 };
 </script>

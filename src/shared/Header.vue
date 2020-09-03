@@ -1,5 +1,5 @@
 <template>
-	<div class="app-header">
+	<div class="app-header" v-if="user">
 		<div class="top">
 			<h1>my TO-DO list</h1>
 			<div>
@@ -26,6 +26,20 @@
 						<button class="nav-item-btn" id="complete">
 							<ion-icon name="checkbox-outline"></ion-icon>
 							<br />Completed
+						</button>
+					</a>
+				</router-link>
+				<router-link
+					:to="'/'+user.username+'/profile'"
+					tag="li"
+					active-class="active"
+					class="nav-item"
+					exact
+				>
+					<a>
+						<button class="nav-item-btn">
+							<ion-icon name="person-outline"></ion-icon>
+							<br />Profile
 						</button>
 					</a>
 				</router-link>
@@ -150,7 +164,6 @@ h1 {
 	border: none;
 }
 ion-icon {
-	color: white;
 	font-size: 30px;
 }
 </style>

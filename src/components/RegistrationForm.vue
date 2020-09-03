@@ -49,6 +49,7 @@ export default {
 				password: this.password,
 				mode: this.mode,
 			});
+			this.$router.go();
 		},
 		...mapActions({
 			saveUser: 'SaveUserAction',

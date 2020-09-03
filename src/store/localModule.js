@@ -28,6 +28,19 @@ export const localStorageModule = {
 				return state.lists.find(elem => elem.id === param);
 			}
 		},
+		getInfo: state => {
+			if (state.lists) {
+				let infoObj = {};
+				infoObj.todo = state.lists.filter(elem => elem.tag === 'todo');
+				infoObj.completed = state.lists.filter(
+					elem => elem.tag === 'completed',
+				);
+				infoObj.archived = state.lists.filter(
+					elem => elem.tag === 'archived',
+				);
+				return infoObj;
+			}
+		},
 	},
 	mutations: {
 		addToLists: (state, payload) => {

@@ -1,4 +1,5 @@
-import Todo from 'routes/Todo.vue';
+import Todo from './routes/Todo.vue';
+import RegistrationForm from './components/RegistrationForm.vue';
 
 //lazy routing from here
 const SideBar = resolve => {
@@ -14,6 +15,11 @@ const Completed = resolve => {
 const Archive = resolve => {
 	require.ensure(['./routes/Archive.vue'], () => {
 		resolve(require('./routes/Archive.vue'));
+	});
+};
+const Profile = resolve => {
+	require.ensure(['./routes/Profile.vue'], () => {
+		resolve(require('./routes/Profile.vue'));
 	});
 };
 const Page404 = resolve => {
@@ -38,7 +44,13 @@ const sidebarChildren = [
 
 export const routes = [
 	{path: '', component: Todo, name: 'home'},
+	{path: '/registration', component: RegistrationForm, name: 'registration'},
 	{path: '/completed', component: Completed, name: 'completed'},
+	{
+		path: '/:username/profile',
+		component: Profile,
+		name: 'Profile',
+	},
 	{
 		path: '/sidebar',
 		component: SideBar,

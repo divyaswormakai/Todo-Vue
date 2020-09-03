@@ -17,6 +17,29 @@ const router = new VueRouter({
 	mode: 'history',
 });
 
+router.beforeEach((to, from, next) => {
+	console.log(localStorage.getItem('user'));
+	console.log(to);
+	if (!localStorage.getItem('user')) {
+		if (to.name !== 'registration') {
+			console.log('to register');
+			next({name: 'registration'});
+		} else {
+			console.log('to register since it is same to register');
+			next();
+		}
+	} else {
+		if (to.name === 'registration') {
+			console.log('stuck here');
+			// router.go();
+			next({name: 'home'});
+		} else {
+			console.log('balai bhayen');
+			next();
+		}
+	}
+});
+
 Vue.directive('list-type', {
 	bind(el, binding, node) {
 		if (binding.modifiers['todo']) {

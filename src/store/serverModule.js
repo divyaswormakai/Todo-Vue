@@ -29,6 +29,21 @@ export const serverStorageModule = {
 				return state.lists.filter(elem => elem.tag === 'archived');
 			}
 		},
+		getInfo: async state => {
+			state.lists = await listServices.getLists();
+
+			if (state.lists) {
+				let infoObj = {};
+				infoObj.todo = state.lists.filter(elem => elem.tag === 'todo');
+				infoObj.completed = state.lists.filter(
+					elem => elem.tag === 'completed',
+				);
+				infoObj.archived = state.lists.filter(
+					elem => elem.tag === 'archived',
+				);
+				return infoObj;
+			}
+		},
 	},
 
 	actions: {
