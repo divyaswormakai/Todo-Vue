@@ -1,4 +1,4 @@
-import Todo from './routes/Todo.vue';
+import Todo from 'routes/Todo.vue';
 
 //lazy routing from here
 const SideBar = resolve => {
@@ -27,21 +27,23 @@ const SideBarComp = resolve => {
 	});
 };
 
+const sidebarChildren = [
+	{path: '', component: SideBarComp},
+	{
+		path: 'archived',
+		component: Archive,
+		name: 'archived',
+	},
+];
+
 export const routes = [
 	{path: '', component: Todo, name: 'home'},
 	{path: '/completed', component: Completed, name: 'completed'},
-
 	{
 		path: '/sidebar',
 		component: SideBar,
-		children: [
-			{path: '', component: SideBarComp},
-			{path: 'archived', component: Archive, name: 'archived'},
-		],
+		children: sidebarChildren,
 	},
-	// path : '/something/completed/
-	// path: '/something/archive/
 
 	{path: '*', component: Page404},
 ];
-// /complete/:id/details

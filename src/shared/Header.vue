@@ -15,17 +15,26 @@
 			<ul class="navbar">
 				<router-link to="/" tag="li" active-class="active" class="nav-item" exact>
 					<a>
-						<button class="nav-item-btn">To-do's</button>
+						<button class="nav-item-btn">
+							<ion-icon name="list-outline"></ion-icon>
+							<br />To-do's
+						</button>
 					</a>
 				</router-link>
 				<router-link to="/completed" tag="li" active-class="active" class="nav-item" exact>
 					<a>
-						<button class="nav-item-btn" id="complete">Completed</button>
+						<button class="nav-item-btn" id="complete">
+							<ion-icon name="checkbox-outline"></ion-icon>
+							<br />Completed
+						</button>
 					</a>
 				</router-link>
 				<router-link to="/sidebar" tag="li" active-class="active" class="nav-item" exact>
 					<a>
-						<button class="nav-item-btn">Others...</button>
+						<button class="nav-item-btn">
+							<ion-icon name="options-outline"></ion-icon>
+							<br />Others...
+						</button>
 					</a>
 				</router-link>
 			</ul>
@@ -116,6 +125,10 @@ h1 {
 	border: solid transparent 3px;
 	border-radius: 10px;
 	background-color: #a2d5c6;
+	transition: all 0.15s ease-in-out;
+}
+.nav-item:hover {
+	transform: scale(1.05, 1.05);
 }
 .nav-item a {
 	width: 100%;
@@ -135,5 +148,9 @@ h1 {
 	color: white;
 	background-color: transparent;
 	border: none;
+}
+ion-icon {
+	color: white;
+	font-size: 30px;
 }
 </style>

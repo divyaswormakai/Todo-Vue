@@ -2,11 +2,7 @@
 	<div class="app-content">
 		<h2>Pending Tasks</h2>
 		<div class="input-row">
-			<input
-				v-model="newInput"
-				@keypress.enter="SavetoList"
-				placeholder="add a new task here..."
-			/>
+			<input v-model="newInput" @keypress.enter="SavetoList" placeholder="add a new task here..." />
 		</div>
 		<ul>
 			<transition-group
@@ -23,11 +19,7 @@
 					v-list-type.todo
 				>
 					<button @click="CompleteTask(item)" id="completeImg">
-						<img
-							src="./../assets/empty.png"
-							height="50"
-							width="50"
-						/>
+						<img src="./../assets/empty.png" height="50" width="50" />
 					</button>
 					{{ item.content }}
 				</li>

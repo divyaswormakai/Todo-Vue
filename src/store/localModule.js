@@ -22,6 +22,12 @@ export const localStorageModule = {
 				return state.lists.filter(elem => elem.tag === 'archived');
 			}
 		},
+		getOne: state => param => {
+			if (state.lists) {
+				console.log(param);
+				return state.lists.find(elem => elem.id === param);
+			}
+		},
 	},
 	mutations: {
 		addToLists: (state, payload) => {

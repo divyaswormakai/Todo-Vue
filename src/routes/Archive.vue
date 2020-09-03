@@ -15,9 +15,7 @@
 					:key="item.id"
 					class="list-item"
 					v-list-type.archive
-				>
-					{{ item.content }}
-				</li>
+				>{{ item.content }}</li>
 			</transition-group>
 		</ul>
 	</div>
