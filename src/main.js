@@ -2,14 +2,12 @@ import Vue from 'vue';
 import App from './App.vue';
 
 import VueRouter from 'vue-router';
-import {routes} from './routes';
+import {routes} from './routes/routes';
 
 import {store} from './store/store';
-import VModal from 'vue-js-modal';
 import AsyncComputed from 'vue-async-computed';
 
 Vue.use(VueRouter);
-Vue.use(VModal, {componentName: 'UserModal'});
 Vue.use(AsyncComputed);
 
 const router = new VueRouter({
@@ -18,18 +16,23 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+	//check for meta file
+	// ------------------------->
 	console.log(localStorage.getItem('user'));
-	console.log(to);
+	console.log(to.meta.type);
+	//user is not saved so redirecto to login
 	if (!localStorage.getItem('user')) {
-		if (to.name !== 'registration') {
-			console.log('to register');
+		if (to.meta.type === 'private') {
+			console.log(
+				'accessing a private route: redirecting to registration',
+			);
 			next({name: 'registration'});
 		} else {
-			console.log('to register since it is same to register');
+			console.log('continue to the public route');
 			next();
 		}
 	} else {
-		if (to.name === 'registration') {
+		if (to.meta.type === 'public') {
 			console.log('stuck here');
 			// router.go();
 			next({name: 'home'});

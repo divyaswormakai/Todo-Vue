@@ -9,7 +9,7 @@
 			</div>
 		</div>
 		<div class="row option-row">
-			<app-mode-switch v-model="currentMode" :changeMode="changeMode"></app-mode-switch>
+			<app-mode-switch v-model="currentMode" :value="currentMode" :changeMode="changeMode"></app-mode-switch>
 		</div>
 		<div class="navbar">
 			<ul class="navbar">
@@ -30,7 +30,7 @@
 					</a>
 				</router-link>
 				<router-link
-					:to="'/'+user.username+'/profile'"
+					:to="'/' + user.username + '/profile'"
 					tag="li"
 					active-class="active"
 					class="nav-item"
@@ -58,7 +58,7 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import ModeSwitchVue from '../components/ModeSwitch.vue';
+import ModeSwitchVue from './component/ModeSwitch.vue';
 export default {
 	created() {
 		this.currentMode = this.mode;

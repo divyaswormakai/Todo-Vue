@@ -19,7 +19,7 @@
 					v-list-type.todo
 				>
 					<button @click="CompleteTask(item)" id="completeImg">
-						<img src="./../assets/empty.png" height="50" width="50" />
+						<img src="./../../assets/empty.png" height="50" width="50" />
 					</button>
 					{{ item.content }}
 				</li>
@@ -83,11 +83,11 @@ ul {
 }
 
 #completeImg {
-	background: url('../assets/empty.png') no-repeat top left;
+	background: url('../../assets/empty.png') no-repeat top left;
 	background-size: 50px 50px;
 }
 #completeImg :hover {
-	background: url('../assets/done.png') no-repeat top left;
+	background: url('../../assets/done.png') no-repeat top left;
 	background-size: 50px 50px;
 }
 </style>
