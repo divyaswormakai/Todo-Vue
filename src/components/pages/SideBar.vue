@@ -1,14 +1,14 @@
 <template>
-	<div class="sidebar">
-		<transition
-			enter-active-class="animate__animated animate__slideInLeft"
-			leave-active-class="animate__animated animate__slideOutRight"
-			appear
-			mode="out-in"
-		>
-			<router-view></router-view>
-		</transition>
-	</div>
+  <div class="sidebar">
+    <transition
+      enter-active-class="animate__animated animate__slideInLeft"
+      leave-active-class="animate__animated animate__slideOutRight"
+      appear
+      mode="out-in"
+    >
+      <router-view></router-view>
+    </transition>
+  </div>
 </template>
 <script>
 export default {};
@@ -16,7 +16,7 @@ export default {};
 
 <style scoped>
 .sidebar {
-	width: 100%;
-	display: flex;
+  width: 100%;
+  display: flex;
 }
 </style>
